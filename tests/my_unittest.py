@@ -4,13 +4,6 @@ from application.services import add_new_shelf, add_new_doc, move_doc, del_doc, 
 
 class TestServices(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        print('method setUpClass')
-
-    def setUp(self):
-        print('method setUp')
-
     def test_add_new_shelf_successfully_1(self):
         print('test_add_new_shelf_successfully_1')
         expected_res = 'Полка успешно добавлена!'
@@ -88,13 +81,3 @@ class TestServices(unittest.TestCase):
         expected_res = 'Документа с таким номером в базе нет!'
         actual_res = return_number_shelf(doc_number='74356')
         self.assertEqual(expected_res, actual_res)
-
-    def tearDown(self):
-        print('method tearDown')
-
-    @classmethod
-    def tearDownClass(cls):
-        print('method tearDownClass')
-
-if __name__ == '__main__':
-    unittest.main()

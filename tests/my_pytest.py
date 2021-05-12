@@ -1,29 +1,12 @@
+import pytest
 from application.ya_uploader import YaUploader
-
-
-uploader = YaUploader('Your TOKEN')
 
 
 class TestYaUploader:
 
-    def setup_class(self):
-        print('method setup_class')
+    uploader = YaUploader('your_token')
+    test_cases = [('test_dir_1', 201), ('test_dir_1', 409), ('test_dir_2', 201)]
 
-    def setup(self):
-        print('method setup')
-
-    def test_create_dir(self):
-        print('test_create_dir')
-        expected_res = 'Папка создана на яндекс диске!'
-        assert uploader.create_dir('test_dir') == expected_res
-
-    def test_failed_to_create_dir(self):
-        print('test_failed_to_create_dir')
-        expected_res = 'Папка с таким именем уже есть!'
-        assert uploader.create_dir('test_dir') == expected_res
-
-    def teardown(self):
-        print('method teardown')
-
-    def teardown_class(self):
-        print('method teardown_class')
+    @pytest.mark.parametrize('dir_name, expected_res', test_cases)
+    def test_create_dir(self, dir_name, expected_res):
+        assert self.uploader.create_dir(dir_name) == expected_res, 'Error'
